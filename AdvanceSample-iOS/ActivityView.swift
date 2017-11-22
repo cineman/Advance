@@ -254,7 +254,7 @@ private struct ActivitySegment {
         return p
     }()
     
-    let initialRotation = ((CGFloat(arc4random() % 100) / 100.0) * CGFloat(M_PI))
+    let initialRotation = ((CGFloat(arc4random() % 100) / 100.0) * CGFloat(Double.pi))
     
     func path(_ size: CGSize, visibility: CGFloat) -> UIBezierPath {
         var p1 = initialPosition
