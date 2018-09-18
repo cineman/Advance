@@ -48,12 +48,12 @@ final class CoverView: UIView {
         urlLabel = UILabel(frame: CGRect.zero)
         
         var attribs: [String: AnyObject] = [:]
-        attribs[NSFontAttributeName] = UIFont.systemFont(ofSize: 12.0, weight: UIFontWeightRegular)
-        attribs[NSForegroundColorAttributeName] = UIColor.white
+        attribs[convertFromNSAttributedStringKey(NSAttributedString.Key.font)] = UIFont.systemFont(ofSize: 12.0, weight: UIFont.Weight.regular)
+        attribs[convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor)] = UIColor.white
         
         // attribs[NSUnderlineStyleAttributeName] = NSUnderlineStyle.StyleSingle.rawValue
         
-        urlLabel.attributedText = NSAttributedString(string: "github.com/storehouse/Advance", attributes: attribs)
+        urlLabel.attributedText = NSAttributedString(string: "github.com/storehouse/Advance", attributes: convertToOptionalNSAttributedStringKeyDictionary(attribs))
         urlLabel.sizeToFit()
         
         super.init(frame: frame)
@@ -73,4 +73,15 @@ final class CoverView: UIView {
         urlLabel.center = CGPoint(x: bounds.midX, y: logoView.frame.maxY + 4.0 + urlLabel.bounds.height/2.0)
     }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

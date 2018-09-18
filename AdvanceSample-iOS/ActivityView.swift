@@ -122,7 +122,7 @@ public final class ActivityView: UIView {
             guard flashing != oldValue else { return }
             if flashing {
                 let t = Timer(timeInterval: 1.0, target: self, selector: #selector(flash), userInfo: nil, repeats: true)
-                RunLoop.main.add(t, forMode: RunLoopMode.commonModes)
+                RunLoop.main.add(t, forMode: RunLoop.Mode.common)
                 flashTimer = t
                 flash()
             } else {
@@ -197,7 +197,7 @@ public final class ActivityView: UIView {
         }
     }
 
-    fileprivate dynamic func flash() {
+    @objc fileprivate dynamic func flash() {
         for i in 0..<segmentLayers.count {
             let t = DispatchTime.now() + Double(Int64(Double(NSEC_PER_SEC) * 0.04 * Double(i))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: t, execute: { 
@@ -214,14 +214,14 @@ public final class ActivityView: UIView {
         let c = CAKeyframeAnimation(keyPath: "strokeColor")
         c.values = [strokeColor.cgColor, flashStrokeColor.cgColor, strokeColor.cgColor]
         c.keyTimes = [0.0, 0.3, 1.0]
-        c.calculationMode = kCAAnimationCubic
+        c.calculationMode = CAAnimationCalculationMode.cubic
         c.duration = 0.5
         sl.add(c, forKey: "flashStrokeColor")
         
         let s = CAKeyframeAnimation(keyPath: "lineWidth")
         s.values = [lineWidth, flashLineWidth, lineWidth]
         s.keyTimes = [0.0, 0.3, 1.0]
-        s.calculationMode = kCAAnimationCubic
+        s.calculationMode = CAAnimationCalculationMode.cubic
         s.duration = 0.5
         sl.add(s, forKey: "flashLineWidth")
         

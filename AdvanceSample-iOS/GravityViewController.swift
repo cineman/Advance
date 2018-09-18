@@ -72,8 +72,8 @@ class GravityViewController: DemoViewController {
         recognizer.isEnabled = false
         contentView.addGestureRecognizer(recognizer)
         
-        resetButton.setTitle("Reset", for: UIControlState())
-        resetButton.setTitleColor(UIColor(red: 0.0, green: 196.0/255.0, blue: 1.0, alpha: 1.0), for: UIControlState())
+        resetButton.setTitle("Reset", for: UIControl.State())
+        resetButton.setTitleColor(UIColor(red: 0.0, green: 196.0/255.0, blue: 1.0, alpha: 1.0), for: UIControl.State())
         resetButton.layer.cornerRadius = 4.0
         resetButton.tintColor = UIColor(red: 0.0, green: 196.0/255.0, blue: 1.0, alpha: 1.0)
         resetButton.layer.borderColor = UIColor(red: 0.0, green: 196.0/255.0, blue: 1.0, alpha: 1.0).cgColor
@@ -115,7 +115,7 @@ class GravityViewController: DemoViewController {
         resetButton.center = CGPoint(x: contentView.bounds.midX, y: contentView.bounds.maxY - 64.0)
     }
     
-    dynamic func press(_ recognizer: UILongPressGestureRecognizer) {
+    @objc dynamic func press(_ recognizer: UILongPressGestureRecognizer) {
         switch recognizer.state {
         case .began, .changed:
             simulation.target = recognizer.location(in: view)
@@ -126,7 +126,7 @@ class GravityViewController: DemoViewController {
         }
     }
     
-    dynamic func reset() {
+    @objc dynamic func reset() {
         simulation.reset(view.bounds.insetBy(dx: 64.0, dy: 128.0))
     }
     

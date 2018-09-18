@@ -36,6 +36,7 @@ extension CGRect: VectorConvertible {
     
     /// Creates a new instance from a vector.
     public init(vector: Vector) {
+        self.init()
         origin = CGPoint(x: CGFloat(vector.x), y: CGFloat(vector.y))
         size = CGSize(width: CGFloat(vector.z), height: CGFloat(vector.w))
     }
